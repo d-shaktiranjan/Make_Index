@@ -60,3 +60,4 @@ if __name__ == "__main__":
     for key in indexDict.keys():
         lineValue = f"{key} : {indexDict[key] if isinstance(indexDict[key],int) else listToString(indexDict[key])}"
         f.write(lineValue + "\n")
+    f.close()
