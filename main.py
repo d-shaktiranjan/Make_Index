@@ -1,4 +1,4 @@
-f = open("collect.txt", "w")
+f = open("index.txt", "w")
 indexDict = {}
 
 excludeList = []
