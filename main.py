@@ -1,31 +1,37 @@
-f = open("collect.txt", "a")
+f = open("collect.txt", "w")
 indexDict = {}
+
+excludeList = []
+with open('exclude-words.txt', 'r') as file:
+    for line in file:
+        for word in line.split():
+            excludeList.append(word)
+
+
+def listToString(userSet):
+    final = ""
+    for item in userSet:
+        final += str(item) + ","
+    return final
 
 
 def readWords(fName, pageNumber):
     with open(fName, 'r') as file:
         for line in file:
             for word in line.split():
-                if word not in indexDict.keys():
-                    indexDict[word] = pageNumber
-                else:
-                    if indexDict[word] != pageNumber:
-                        indexDict[word] = [indexDict[word], pageNumber]
-
-
-def listToString(userList):
-    final = ""
-    for i in range(len(userList)):
-        if i == 0:
-            final += str(userList[i])
-        else:
-            final += ","+str(userList[i])
-    return final
+                if word not in excludeList:
+                    if word not in indexDict.keys():
+                        indexDict[word] = {pageNumber}
+                    else:
+                        indexDict[word].add(pageNumber)
 
 
 if __name__ == "__main__":
-    readWords("demo.txt", 1)
-    readWords("demo2.txt", 2)
+    readWords("Page1.txt", 1)
+    readWords("Page2.txt", 2)
+    readWords("Page3.txt", 3)
+    f.write("Word : Page Numbers\n")
+    f.write("-------------------\n")
     for key in indexDict.keys():
         lineValue = f"{key} : {indexDict[key] if isinstance(indexDict[key],int) else listToString(indexDict[key])}"
-        print(lineValue)
+        f.write(lineValue + "\n")
