@@ -10,8 +10,12 @@ with open('exclude-words.txt', 'r') as file:
 
 def listToString(userSet):
     final = ""
-    for item in userSet:
-        final += str(item) + ","
+    newList = list(userSet)
+    for i in range(len(newList)):
+        if i == 0:
+            final += str(newList[i])
+        else:
+            final += ","+str(newList[i])
     return final
 
 
