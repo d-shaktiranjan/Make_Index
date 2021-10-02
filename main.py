@@ -15,11 +15,23 @@ def listToString(userSet):
     return final
 
 
+def checkNumeric(word):
+    try:
+        word = int(word)
+    except:
+        pass
+    try:
+        word = float(word)
+    except:
+        pass
+    return isinstance(word, int) or isinstance(word, float)
+
+
 def readWords(fName, pageNumber):
     with open(fName, 'r') as file:
         for line in file:
             for word in line.split():
-                if word not in excludeList:
+                if word not in excludeList and not checkNumeric(word):
                     if word not in indexDict.keys():
                         indexDict[word] = {pageNumber}
                     else:
