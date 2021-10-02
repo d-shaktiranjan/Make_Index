@@ -42,10 +42,19 @@ def readWords(fName, pageNumber):
                         indexDict[word].add(pageNumber)
 
 
+def sortByKeys(userDict):
+    myDict = {}
+    sortedKeys = sorted(userDict.keys())
+    for item in sortedKeys:
+        myDict[item] = userDict[item]
+    return myDict
+
+
 if __name__ == "__main__":
     readWords("Page1.txt", 1)
     readWords("Page2.txt", 2)
     readWords("Page3.txt", 3)
+    indexDict = sortByKeys(indexDict)
     f.write("Word : Page Numbers\n")
     f.write("-------------------\n")
     for key in indexDict.keys():
